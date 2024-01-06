@@ -1,0 +1,38 @@
+From collections import deque
+
+class Node:
+    def init(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+def pre_order_traversal(root):
+    if root is None:
+        return []
+
+    result = []
+    queue = deque([root])
+
+    while queue:
+        node = queue.popleft()
+        result.append(node.value)
+
+        if node.right:
+            queue.appendleft(node.right)
+        if node.left:
+            queue.appendleft(node.left)
+
+    return result
+
+root = Node('40',
+             Node('11',
+                  Node('63'),
+                  Node('41',
+                       Node('05'),
+                       Node('42'))),
+             Node('15',
+                  None,
+                  Node('MY',
+                       Node('ID'))))
+
+print(pre_order_traversal(root))
